@@ -49,7 +49,7 @@ class App extends React.Component {
 }
 
   addTrack (track) {
-    const foundTrack = this.state.playlistTracks.find(playlistTrack => playlistTrack.id === track.id);
+    const foundTrack = this.state.playlistTracks.find((playlistTrack) => playlistTrack.id === track.id);
     const newTrack = this.state.playlistTracks.concat(track);
     
     foundTrack ? console.log("Track already exists") : this.setState({ playlistTracks: newTrack })
@@ -62,7 +62,7 @@ class App extends React.Component {
   }
 
   removeTrack(track) {
-    const isPresent = this.state.playlistTracks.filter(playlistTrack => playlistTrack.id !== track.id);
+    const isPresent = this.state.playlistTracks.filter((playlistTrack) => playlistTrack.id !== track.id);
     this.setState({ playlistTracks: isPresent });
   }
 
@@ -71,15 +71,21 @@ class App extends React.Component {
   }
 
   savePlaylist() {
-    const trackURIs = this.state.playlistTracks.map(track => track.uri);
+    const trackURIs = this.state.playlistTracks.map((track) => track.uri);
+    const name = this.state.playlistName;
+    Spotify.savePlaylistName(name, trackURIs).then(() => {
+      this.setState({
+        playlistName: "New Playlist",
+        playlistTracks: [],
+      });
+    });
   }
 
   search(term) {
-    Spotify.search(term)
-      .then(result => {
-        this.setState({ searchResults: result })
-      })
-    //console.log(term);
+    Spotify.search(term).then((result) => {
+        this.setState({ searchResults: result });
+        //console.log(term);
+    });   
   }
 
   render() {

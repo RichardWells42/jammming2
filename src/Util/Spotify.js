@@ -1,6 +1,7 @@
 let accessToken = "";
 const clientID = "09bf45de865d4de1a2b798757ff98d5e";
 const redirectURI = "http://localhost:3000/";
+//const redirectURI = "https://www.jammming2.surge.sh";
 
 const Spotify = {
   getAccessToken() {
@@ -23,7 +24,7 @@ const Spotify = {
   search(term) {
     const accessToken = Spotify.getAccessToken();
     return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
-      headers: {Authorization: `Bearer ${accessToken}`},
+      headers: { Authorization: `Bearer ${accessToken}` },
     })
     .then(response => {
       return response.json();
@@ -32,15 +33,47 @@ const Spotify = {
       if (!jsonResponse.tracks) {
         return [];
       }
-      return jsonResponse.tracks.items.map(tracks => ({
+      return jsonResponse.tracks.items.map((tracks) => ({
         id: tracks.id,
         name: tracks.name,
         artist: tracks.artists[0].name,
         album: tracks.album.name,
         uri: tracks.uri,
-      }))
+      }));
     });
-  }
+  },
+
+  savePlaylistName(name, trackURIs) {
+    if (!name || !trackURIs) {
+      return;
+    }
+    let accessToken = Spotify.getAccessToken();
+    const headers = { Authorization: `Bearer ${accessToken}` };
+    let userID = "";
+    return fetch("https://api.spotify.com/v1/me", { headers: headers }).then(
+      (response) => response.json()
+    )
+      .then(jsonResponse => {
+        userID = jsonResponse;
+        return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`, {
+          headers: headers,
+          method: "POST",
+          body: JSON.stringify({ name: name }),
+        })
+        .then((response) => response.json())
+        .then(jsonResponse => {
+          const playlistID = jsonResponse.id;
+          return fetch(
+            `https://api.spotify.com/v1/playlists/${playlistID}/tracks`, 
+            {
+              headers: headers,
+              method: "POST",
+              body: JSON.stringify({ uris: trackURIs }),
+            }
+          );
+        });
+      });
+  },
 };
 
 //export default Spotify;

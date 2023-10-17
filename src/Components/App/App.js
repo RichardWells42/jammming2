@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 //import { render } from '@testing-library/react';
-import SearchBar from '../SearchBar/SearchBar'
+import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 import { Spotify } from '../../Util/Spotify';

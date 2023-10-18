@@ -7,6 +7,14 @@
   box-shadow: 0 4px 2px 2px #000000;
 }
 
+h2 {
+  border-bottom: 2px solid #6f6f6f;
+  margin-top: 1.9rem;
+  padding-bottom: 8px;
+  font-size: 1.55rem; 
+
+}
+
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent;

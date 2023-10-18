@@ -11,34 +11,34 @@ class App extends React.Component {
     super(props);
     this.state = {
       searchResults: [
-    {
-      name: "Example track name",
-      artist: "Example track artist",
-      album: "Example track album",
-      id: 1,
-    },
-    {
-      name: "Example track name 2",
-      artist: "Example track artist 2",
-      album: "Example track album 2",
-      id: 2,
-    },
+    // {
+    //   name: "Example track name",
+    //   artist: "Example track artist",
+    //   album: "Example track album",
+    //   id: 1,
+    // },
+    // {
+    //   name: "Example track name 2",
+    //   artist: "Example track artist 2",
+    //   album: "Example track album 2",
+    //   id: 2,
+    // },
     
       ],
       playlistName: "Example Playlist",
       playlistTracks: [
-        {
-          name: "Example playlist track name",
-          artist: "Example playlist track artist",
-          album: "Example playlist track album",
-          id: 3,
-        },
-        {
-          name: "Example playlist track name 4",
-          artist: "Example playlist track artist 4",
-          album: "Example playlist track album 4",
-          id: 4,
-        },
+        // {
+        //   name: "Example playlist track name",
+        //   artist: "Example playlist track artist",
+        //   album: "Example playlist track album",
+        //   id: 3,
+        // },
+        // {
+        //   name: "Example playlist track name 4",
+        //   artist: "Example playlist track artist 4",
+        //   album: "Example playlist track album 4",
+        //   id: 4,
+        // },
       ],
     };
     this.addTrack = this.addTrack.bind(this);

@@ -87,6 +87,10 @@ class App extends React.Component {
         //console.log(term);
     });   
   }
+            // added this to get rid of startup glitch - having to search twice before it works correctly
+  componentDidMount() {
+    window.addEventListener('load', () => {Spotify.getAccessToken()});
+  }
 
   render() {
     return (

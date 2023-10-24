@@ -6,6 +6,15 @@ import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 import { Spotify } from '../../Util/Spotify';
 
+
+// Fontawesome imports for global use
+import { library } from '@fortawesome/fontawesome-svg-core';             //trying to add an audio sample 2 !!!!!!!!y
+import { fab }  from '@fortawesome/free-brands-svg-icons';
+import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
+
+library.add(fab, faPlay, faPause);
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);

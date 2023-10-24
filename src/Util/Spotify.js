@@ -1,7 +1,9 @@
 let accessToken = "";
 const clientID = "09bf45de865d4de1a2b798757ff98d5e";
+
 //const redirectURI = "http://localhost:3000/";
 //const redirectURI = "https://www.jammming2.surge.sh";
+
 const redirectURI = "https://merry-cajeta-b1918a.netlify.app";
 
 const Spotify = {
@@ -39,7 +41,12 @@ const Spotify = {
         name: tracks.name,
         artist: tracks.artists[0].name,
         album: tracks.album.name,
-        uri: tracks.uri,
+        uri: tracks.uri, 
+
+        preview: tracks.preview_url           //trying to add an audio sample 2 !!!!!!!! 
+
+        // cover: tracks.album.images[2].url,
+        // audio: tracks.preview_url,    //trying to add an audio sample
       }));
     });
   },
@@ -75,6 +82,36 @@ const Spotify = {
         });
       });
   },
+                                  //trying to add an audio sample 2 !!!!!!!!  
+  playTrack(name, trackURIs) {
+    if (!name || !trackURIs.length) {
+        return;
+    }
+
+    const accessToken = Spotify.getAccessToken();
+    const bearer = {Authorization: `Bearer ${accessToken}`}
+
+    return fetch(`https://api.spotify.com/v1/me`, {headers: bearer}
+    ).then(response => response.json()
+    ).then(jsonResponse => {
+        return fetch(`https://api.spotify.com/v1/me/player/play`,
+            {
+            headers: bearer,
+            method: 'POST',
+            body: JSON.stringify(
+                {
+                    name: name,
+                    "context_uri": "spotify:album:5ht7ItJgpBH7W6vJ5BqpPr",
+                    "offset": {"position": 5},
+                    "position_ms": 0
+                }
+            )
+        })
+    })
+  }
+
+
+
 };
 
 //export default Spotify;

@@ -22,8 +22,9 @@ class SearchBar extends React.Component {
         <input
         placeholder="Enter A Song, Album, or Artist" 
         onChange={this.handleTermChange} 
+        onKeyDown={this.search}
         />
-        <button className="SearchButton" onKeyDown={this.search} onClick={this.search}>SEARCH</button>     
+        <button className="SearchButton" onClick={this.search}>SEARCH</button>     
       </div>
     );
   }
